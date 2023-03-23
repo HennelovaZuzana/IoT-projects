@@ -1,0 +1,446 @@
+[
+    {
+        "id": "20937c1a1a43d85f",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9411cb9c696d8b4d",
+        "type": "ui_gauge",
+        "z": "20937c1a1a43d85f",
+        "name": "",
+        "group": "",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "gauge",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 610,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "01e3d8ba899a7f8e",
+        "type": "inject",
+        "z": "20937c1a1a43d85f",
+        "d": true,
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 180,
+        "wires": [
+            [
+                "0e37d2d92acbaea2"
+            ]
+        ]
+    },
+    {
+        "id": "0e37d2d92acbaea2",
+        "type": "change",
+        "z": "20937c1a1a43d85f",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload % 10",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 180,
+        "wires": [
+            [
+                "9411cb9c696d8b4d"
+            ]
+        ]
+    },
+    {
+        "id": "04d588f575d5e1a7",
+        "type": "mqtt in",
+        "z": "20937c1a1a43d85f",
+        "name": "light intensity",
+        "topic": "upjs/iot/LightIntensity/x",
+        "qos": "0",
+        "datatype": "utf8",
+        "broker": "b47756decc1d32cc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 320,
+        "wires": [
+            [
+                "503c3852c9963cac",
+                "3acac22ccea7d4ab"
+            ]
+        ]
+    },
+    {
+        "id": "7bab9078ab6c54d6",
+        "type": "mqtt in",
+        "z": "20937c1a1a43d85f",
+        "name": "proximity",
+        "topic": "upjs/iot/Proximity/x",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "b47756decc1d32cc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 460,
+        "wires": [
+            [
+                "e9d5df6cf3fd6a36"
+            ]
+        ]
+    },
+    {
+        "id": "e9d5df6cf3fd6a36",
+        "type": "ui_gauge",
+        "z": "20937c1a1a43d85f",
+        "name": "",
+        "group": "98a3f5ccc85aa536",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Proximity",
+        "label": "",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 360,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "4a44bfb94c9bf948",
+        "type": "mqtt in",
+        "z": "20937c1a1a43d85f",
+        "name": "battery",
+        "topic": "upjs/iot/battery/percentage",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "b47756decc1d32cc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 580,
+        "wires": [
+            [
+                "b4e8ee9bd970ef98"
+            ]
+        ]
+    },
+    {
+        "id": "ddbcc5e71047f37b",
+        "type": "ui_gauge",
+        "z": "20937c1a1a43d85f",
+        "name": "",
+        "group": "98a3f5ccc85aa536",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "wave",
+        "title": "Battery",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 480,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "b4e8ee9bd970ef98",
+        "type": "change",
+        "z": "20937c1a1a43d85f",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload*100",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 580,
+        "wires": [
+            [
+                "ddbcc5e71047f37b"
+            ]
+        ]
+    },
+    {
+        "id": "503c3852c9963cac",
+        "type": "ui_chart",
+        "z": "20937c1a1a43d85f",
+        "name": "",
+        "group": "98a3f5ccc85aa536",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "Light Intensity",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "mm:ss",
+        "interpolate": "linear",
+        "nodata": "Witing for data",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "500",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 420,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "edc2a72b05af0627",
+        "type": "ui_audio",
+        "z": "20937c1a1a43d85f",
+        "name": "",
+        "group": "98a3f5ccc85aa536",
+        "voice": "Microsoft Filip - Slovak (Slovakia)",
+        "always": "",
+        "x": 940,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "e4a79c7216eb8415",
+        "type": "switch",
+        "z": "20937c1a1a43d85f",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "100",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 590,
+        "y": 320,
+        "wires": [
+            [
+                "fcd1037142e01f93"
+            ],
+            [
+                "d52350b5f9a1c384"
+            ]
+        ]
+    },
+    {
+        "id": "fcd1037142e01f93",
+        "type": "template",
+        "z": "20937c1a1a43d85f",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Dnes je slnečný deň. Intenzita svetla je {{payload}}.",
+        "output": "str",
+        "x": 760,
+        "y": 280,
+        "wires": [
+            [
+                "edc2a72b05af0627"
+            ]
+        ]
+    },
+    {
+        "id": "d52350b5f9a1c384",
+        "type": "template",
+        "z": "20937c1a1a43d85f",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Dnes je zamračené.",
+        "output": "str",
+        "x": 760,
+        "y": 380,
+        "wires": [
+            [
+                "bcbedcaa32b7c264"
+            ]
+        ]
+    },
+    {
+        "id": "bcbedcaa32b7c264",
+        "type": "ui_audio",
+        "z": "20937c1a1a43d85f",
+        "name": "",
+        "group": "98a3f5ccc85aa536",
+        "voice": "Microsoft Filip - Slovak (Slovakia)",
+        "always": "",
+        "x": 920,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "3acac22ccea7d4ab",
+        "type": "trigger",
+        "z": "20937c1a1a43d85f",
+        "name": "",
+        "op1": "",
+        "op2": "",
+        "op1type": "nul",
+        "op2type": "payl",
+        "duration": "5",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 400,
+        "y": 300,
+        "wires": [
+            [
+                "e4a79c7216eb8415"
+            ]
+        ]
+    },
+    {
+        "id": "b47756decc1d32cc",
+        "type": "mqtt-broker",
+        "name": "mobil",
+        "broker": "top://test.mosquitto.org",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "98a3f5ccc85aa536",
+        "type": "ui_group",
+        "name": "Mobile sensors",
+        "tab": "3c6e217a9b83052a",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3c6e217a9b83052a",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
