@@ -3,6 +3,7 @@
 - **Cieľ**: zobrazovať dáta z mobilných senzorov, ktoré sú posielané cez MQTT
 
 # Schéma zapojenia
+Exportovaný json tohto zapojenia je dostupný v priečinku node-red pod názvom node-red-code.json
 ![Schéma](Snímka.PNG)
 
 # Princíp fungovania
